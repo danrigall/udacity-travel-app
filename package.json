@@ -1,0 +1,19 @@
+{
+  "name": "5-travel-app",
+  "version": "1.0.0",
+  "description": "An app to help plan your travel",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danrigall/udacity-travel-app.git"
+  },
+  "author": "Dan Rigall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danrigall/udacity-travel-app/issues"
+  },
+  "homepage": "https://github.com/danrigall/udacity-travel-app#readme"
+}
