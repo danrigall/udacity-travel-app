@@ -1,27 +1,35 @@
 // Express to run server and routes
-const express = require('express');
+const express = require('express')
+
+// API Credentials from environment file
+const dotenv = require('dotenv')
+
+dotenv.config()
+const apiKey = process.env.API_KEY
 
 // Start an instance of app
-const app = express();
+const app = express()
 
 // Dependencies
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+// const bodyParser = require('body-parser');
+// app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.json());
 
 // Cors for cross origin allowance
-const cors = require('cors');
-app.use(cors());
+const cors = require('cors')
+app.use(cors())
 
 // Initialize main project folder
-app.use(express.static('website'));
+app.use(express.static('dist'))
 
-const port = 8000;
+console.log(__dirname)
+
+const port = 3030
 
 // Confirm that server is running
 const server = app.listen(port,()=>{
-  console.log(`Server running on localhost: ${port}`)
-});
+  console.log(`SERVER IS RUNNING on localhost: ${port}`)
+})
 
 // Array to hold project data
 const projectData = []

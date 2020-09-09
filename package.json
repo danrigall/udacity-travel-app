@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/danrigall/udacity-travel-app/issues"
   },
-  "homepage": "https://github.com/danrigall/udacity-travel-app#readme"
+  "homepage": "https://github.com/danrigall/udacity-travel-app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
 }
