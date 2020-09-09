@@ -9,7 +9,7 @@ let d = new Date();
 let newDate = (d.getMonth()+1) + '.' + d.getDate() + '.' + d.getFullYear();
 
 // Function to respond to the click only after rquirements are filled
-function clickRespond(e) {
+function handleSubmit(evt) {
   if (zip.value.length !== 5) {
     zip.classList.add('invalid');
     console.log('Invalid zip code entered!')
@@ -82,4 +82,6 @@ function clearFields() {
   feelings.classList.remove('invalid')
 }
 
-document.getElementById('generate').addEventListener('click', clickRespond)
+document.getElementById('generate').addEventListener('click', handleSubmit)
+
+export { allMyFunctionsPlz }
