@@ -2,28 +2,25 @@
 body {
   height: 100vh;
   margin: auto;
-  background: linear-gradient(160deg, #0087ff, #ffc068);
+  background-color: gray
 }
 
 
 /* Page header styles */
-#page_header {
-  font-family: 'Pacifico', cursive;
-  margin: 0rem 3rem;
+#page-header {
+  font-family: 'Arial', sans-serif;
 }
 
-#page_header h1 {
+#page-header h1 {
   font-weight: normal;
   font-size: 5rem;
-  font-family: 'Comfortaa', cursive;
-  color: white;
   letter-spacing: 3px;
-  text-shadow: white 4px 1px 6px;
   margin: auto;
-  padding-top: 4rem;
+  padding: 1rem 4rem;
+  background-color: white;
 }
 
-#page_header h2 {
+#page-header h2 {
   font-weight: normal;
   font-size: 3rem;
   color: white;
@@ -79,7 +76,7 @@ body {
   padding: 8px 12px 6px;
   font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
-  background-color: steelblue;
+  background-color: white;
   border-radius: 3px;
   margin-top: 4px;
   text-transform: uppercase;
@@ -87,9 +84,9 @@ body {
 }
 
 #generate:hover {
-  border: 2px outset goldenrod;
+  border: white;
   color: white;
-  background-color: #002540;
+  background-color: black;
 }
 
 

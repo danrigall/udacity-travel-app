@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Planner</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.scss">
 </head>
 
 <body>
@@ -19,14 +18,17 @@
             <label for="destination">My trip to:</label>
             <input type="text" id="destination" name="destination" pattern="[0-9]{5}" title="5 digit zip code" placeholder="enter location"><br>
             <label for="trip-start">Departing:</label>
-            <input type="date" id="start" name="trip-start" min="10-01-2020" max="10-01-2021">
-            <button id="generate">save trip</button>
+            <input type="date" id="start" name="trip-start" min="2020-10-01" max="2021-10-01"><br>
+            <input type="submit" id="generate" value="save trip">
         </form>
         <section id="all-posts">
             <div class="entry-holder">
-                <div class="wait"></div>
-                <div class="temp"></div>
-                <div class="skies"></div>
+                <div class="image"></div>
+                <div class="stat-holder">
+                    <div class="wait"></div>
+                    <div class="temp"></div>
+                    <div class="skies"></div>
+                </div>
             </div>
         </section>
     </main>
