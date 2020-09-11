@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Planner</title>
-    <link rel="stylesheet" href="../styles/style.scss">
 </head>
 
 <body>
@@ -15,10 +14,10 @@
 
     <main>
         <form id="form" onsubmit="return false">
-            <label for="destination">My trip to:</label>
-            <input type="text" id="destination" name="destination" pattern="[0-9]{5}" title="5 digit zip code" placeholder="enter location"><br>
+            <label for="place">My trip to:</label>
+            <input type="text" id="place" name="place" pattern="[a-zA-Z\s]{2,85}" title="valid city" placeholder="enter city" required><br>
             <label for="trip-start">Departing:</label>
-            <input type="date" id="start" name="trip-start" min="2020-10-01" max="2021-10-01"><br>
+            <input type="date" id="start" name="trip-start" min="2020-10-01" max="2021-10-01" required><br>
             <input type="submit" id="generate" value="save trip">
         </form>
         <section id="all-posts">

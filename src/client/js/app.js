@@ -1,8 +1,6 @@
 // Global Variables
-const baseURL = 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&zip=';
-const apiKey = '&appid=';
-const zip = document.getElementById('zip');
-const feelings = document.getElementById('feelings');
+
+import { load } from "dotenv/types";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -10,27 +8,39 @@ let newDate = (d.getMonth()+1) + '.' + d.getDate() + '.' + d.getFullYear();
 
 // Function to respond to the click only after rquirements are filled
 function handleSubmit(evt) {
-  if (zip.value.length !== 5) {
-    zip.classList.add('invalid');
-    console.log('Invalid zip code entered!')
-  } else if (feelings.value.length < 4) {
-    feelings.classList.add('invalid');
-    console.log('Both input fields must be filled!');
-  } else {
-    fetchAndPost()
-  }
+  evt.preventDefault()
+  let location = document.getElementById('place').value
+  let date = document.getElementById('start').value
+
+  console.log('Destination: ' + encodeURI(location))
+  console.log('Departure: ' + date)
+
+  postInput('/add', { location: encodeURI(location), date: date })
+
+  getTemp(baseURL, zipValue, apiKey)
+    .then(function (temp) {
+    console.log(temp)
+    return postData('/add', { temp: temp, date: newDate, thoughts: feelings.value })
+    })
+    .then(function () {
+    updateUI();
+    })
 }
 
-function fetchAndPost() {
-  const zipValue = zip.value;
-  getTemp(baseURL, zipValue, apiKey)
-  .then(function(temp) {
-    console.log(temp)
-    return postData('/add', {temp: temp, date: newDate, thoughts: feelings.value})
+const postInput = async (url = '', data = {}) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json', },
+    body: JSON.stringify(data),
   })
-  .then(function() {
-    updateUI();
-  })
+  try {
+    const newData = await response.json();
+    console.log(newData)
+    return newData
+  } catch (error) {
+    console.log('ERROR in POST:', error);
+  }
 }
 
 // Async GET
