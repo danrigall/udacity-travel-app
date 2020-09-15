@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
   res.sendFile('dist/index.html')
 })
 
-const port = 3030
+const port = 3031
 
 // Confirm that server is running
 const server = app.listen(port,()=>{

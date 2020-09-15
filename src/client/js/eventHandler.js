@@ -11,7 +11,7 @@ function handleSubmit(evt) {
 
   console.log('Destination: ' + locationURI)
   console.log('Departure: ' + dateStr)
-  Client.postInput('https://localhost:3030/add', { location: locationURI, date: dateStr })
+  Client.postInput('https://localhost:3031/add', { location: locationURI, date: dateStr })
     .then(function () {
     Client.updateUI(dateStr);
     })

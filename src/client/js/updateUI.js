@@ -1,6 +1,9 @@
 const updateUI = async (dateStr) => {
-  const request = await fetch('https://localhost:3030/all')
+  const request = await fetch('https://localhost:3031/all')
   try {
+    // if (zip.value.length !== 5) {
+    //   zip.classList.add('invalid');
+    //   console.log('Invalid zip code entered!')
     const allData = await request.json()
     console.log(allData)
     document.getElementById('entryHolder').style.display = 'block'
@@ -13,4 +16,4 @@ const updateUI = async (dateStr) => {
   }
 }
 
-export {updateUI}
+export { updateUI }
