@@ -17,11 +17,11 @@ function handleSubmit(evt) {
 
   postInput('/add', { location: encodeURI(location), date: date })
 
-  getTemp(baseURL, zipValue, apiKey)
-    .then(function (temp) {
-    console.log(temp)
-    return postData('/add', { temp: temp, date: newDate, thoughts: feelings.value })
-    })
+  // getTemp(baseURL, zipValue, apiKey)
+  //   .then(function (temp) {
+  //   console.log(temp)
+  //   return postData('/add', { temp: temp, date: newDate, thoughts: feelings.value })
+  //   })
     .then(function () {
     updateUI();
     })
@@ -75,6 +75,7 @@ const updateUI = async()=> {
   const request = await fetch('/all')
   try{
     const allData = await request.json()
+    console.log(allData)
     document.getElementById('entryHolder').style.display = 'block'
     document.getElementById('date').innerHTML = `<u>Date:</u> ${allData[0].date}`
     document.getElementById('temp').innerHTML = `<u>Temperature:</u> ${allData[0].temp}&deg`

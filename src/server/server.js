@@ -5,9 +5,6 @@ const express = require('express')
 const dotenv = require('dotenv')
 
 dotenv.config()
-const apiKey = process.env.API_KEY
-const userCode = process.env.USR_CODE
-
 
 // Start an instance of app
 const app = express()
@@ -38,47 +35,91 @@ const server = app.listen(port,()=>{
 })
 
 // Arrays to hold project data
-const geoData = []
+let weatherData = []
+let geoData = []
+let pixData = []
 
 // Set up GET route
 app.get('/all', (req, res)=> {
-  res.send(projectData);
+  res.send(weatherData, geoData, pixData);
 });
 
 // Set up POST route
 app.post('/add', addData);
 
 const addData = async (req, res) => {
-  let newData = {
+
+  let inputData = {
     location: req.body.location,
     date: req.body.date
   }
-  const geoBaseURL = 'http://api.geonames.org/searchJSON?q='
+
+  console.log(inputData)
+  const monthDay = function() {
+    let dateSplit = inputData.date.value.split('-') // *** Maybe don't need .value??? ***
+    return (dateSplit[1] + '-' + dateSplit[2])
+  }
+
+  const userCode = process.env.USR_CODE
+  const geoBaseURL = 'http://api.geonames.org/searchJSON?q=' // THEN NEED CITY NAME
   const geoAddURL = '&fuzzy=0.8&maxRows=10&username='
-  console.log(newData)
-  projectData.unshift(newData)
-  const geoObj = await getGeoObj(geoBaseURL + newData.location + geoAddURL + userCode))
-    .then(getWeather())
-  // res.send(projectData)
-  // console.log(projectData)
+
+  const geoArr = await getGeonames(geoBaseURL + inputData.location + geoAddURL + userCode))
+  // geoArr returns lng, lat, name(city name), adminName1(state) & countryName
+  console.log(geoArr)
+  geoData.unshift(geoArr.name + ' ,' + geoArr.adminName1 ' ,' + geoArr.countryName)
+
+  const weatherKey = process.env.WEATHER_KEY
+  const weatherURL = 'https://api.weatherbit.io/v2.0/normals?' // THEN NEEDS LAT & LNG
+  const latLong = `lat=${geoArr.lat}&lon=${geoArr.lng}`
+  const weatherAddURL = `&start_day=${monthDay}&end_day=${monthDay}&tp=daily&key=`
+
+  const weathArr = await getWeather(weatherURL + latLong + weatherAddURL + weatherKey)
+  // weathArr returns max_temp, min_temp, precip, snow
+  console.log(weathArr)
+  weatherData.unshift({
+    max: weathArr.max_temp,
+    min: weathArr.min_temp,
+    precip: weathArr.precip,
+    snow: weathArr.snow
+  })
+
+  const pixKey = process.env.PIX_KEY
+  const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoArr.name}&image_type=photo&orientation=horizontal&safesearch=true`
+  const picSrc = await getPix(pixURL)
+  pixData.unshift(picSrc)
 }
 
-const getGeoObj = async (baseURL, location, addURL, user) => {
+const getGeonames = async (baseURL, location, addURL, user) => {
   const request = await fetch(baseURL + location + addURL + user);
     try {
-        const geoObj = await request.json()
-        return geoObj.[0];
+        const geoInfo = await request.json()
+        if (geoInfo.geonames.length == 0) {
+          throw new Error('Geonames did not return any data')
+        } else {
+          return geoInfo.geonames[0];
+        }
     } catch (error) {
-        console.log("ERROR in GET:", error);
+        console.log("ERROR in Geo GET:", error);
     }
 }
 
-const getWeather = async () => {
-    const request = await fetch(geoURL);
+const getWeather = async (baseURL, coord, addURL, key) => {
+  const request = await fetch(baseURL + coord + addURL + key);
     try {
-        const geoObj = await request.json()
-        return geoObj.[0];
+        const weatherObj = await request.json()
+        return weatherObj.data[0];
     } catch (error) {
-        console.log("ERROR in GET:", error);
+        console.log("ERROR in Weather GET:", error);
     }
+}
+
+const getPix = async (url) => {
+  const request = await fetch(url);
+  try {
+    const pixObject = await request.json()
+    return pixObject.hits[0].webformatURL
+  } catch (error) {
+    console.log("ERROR in Pix GET:", error);
+  }
 }
