@@ -1,14 +1,18 @@
 // Import js files from 'client'
-import { allMyFunctionsPlz } from './js/app'
-import { plusThisOneToo } from './js/stuff'
+import { updateUI } from "./js/updateUI"
+import { postInput } from "./js/postData"
+import { dateDiff } from "./js/dateHandler"
+import { handleSubmit } from "./js/eventHandler"
 
 // Import styles from 'client'
 import './styles/style.scss'
 
-document.addEventListener('click', allMyFunctionsPlz)
+document.getElementById('generate').addEventListener('click', handleSubmit)
 alert('I am the INDEX OF ALL JS & SCSS in client folder!!')
 
 export {
-    allMyFunctionsPlz,
-    plusThisOneToo
+    updateUI,
+    postInput,
+    dateDiff,
+    handleSubmit
 }

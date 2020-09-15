@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
   res.sendFile('dist/index.html')
 })
 
-const port = 8080
+const port = 3030
 
 // Confirm that server is running
 const server = app.listen(port,()=>{
@@ -38,14 +38,6 @@ const server = app.listen(port,()=>{
 let weatherData = []
 let geoData = []
 let pixData = []
-
-// Set up GET route
-app.get('/all', (req, res)=> {
-  res.send(weatherData, geoData, pixData);
-});
-
-// Set up POST route
-app.post('/add', addData);
 
 const addData = async (req, res) => {
 
@@ -64,10 +56,10 @@ const addData = async (req, res) => {
   const geoBaseURL = 'http://api.geonames.org/searchJSON?q=' // THEN NEED CITY NAME
   const geoAddURL = '&fuzzy=0.8&maxRows=10&username='
 
-  const geoArr = await getGeonames(geoBaseURL + inputData.location + geoAddURL + userCode))
+  const geoArr = await getGeonames(geoBaseURL + inputData.location + geoAddURL + userCode)
   // geoArr returns lng, lat, name(city name), adminName1(state) & countryName
   console.log(geoArr)
-  geoData.unshift(geoArr.name + ' ,' + geoArr.adminName1 ' ,' + geoArr.countryName)
+  geoData.unshift(geoArr.name + ' ,' + geoArr.adminName1 + ' ,' + geoArr.countryName)
 
   const weatherKey = process.env.WEATHER_KEY
   const weatherURL = 'https://api.weatherbit.io/v2.0/normals?' // THEN NEEDS LAT & LNG
@@ -124,3 +116,11 @@ const getPix = async (url) => {
     console.log("ERROR in Pix GET:", error);
   }
 }
+
+// Set up GET route
+app.get('/all', (req, res) => {
+  res.send(weatherData, geoData, pixData);
+});
+
+// Set up POST route
+app.post('/add', addData);
