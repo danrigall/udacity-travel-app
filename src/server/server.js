@@ -86,8 +86,7 @@ const addData = async (req, res) => {
 
   const pixKey = process.env.PIX_KEY
   const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoArr.name}&image_type=photo&orientation=horizontal&safesearch=true`
-  const picSrc = await getPix(pixURL)
-  pixData.unshift(picSrc)
+  getPix(pixURL)
 }
 
 const getGeonames = async (baseURL, location, addURL, user) => {
@@ -118,7 +117,9 @@ const getPix = async (url) => {
   const request = await fetch(url);
   try {
     const pixObject = await request.json()
-    return pixObject.hits[0].webformatURL
+    const pixSrc = pixObject.hits[0].webformatURL
+    pixData.unshift(pixSrc)
+    return pixSrc
   } catch (error) {
     console.log("ERROR in Pix GET:", error);
   }
