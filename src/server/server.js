@@ -46,26 +46,32 @@ const monthDay = function () {
   console.log('Date w/o year: ' + (dateSplit[1] + '-' + dateSplit[2]))
 }
 
-const handleData = async (req, res) => {
+function handleInput(req, res) {
 
   let userInput = {
     location: req.body.location,
     date: req.body.date
   }
-
+  console.log('req body (userInput) is: ')
+  console.log(userInput)
   inputData.unshift(userInput)
+  // console.log('Post Response is: ')
+  // console.log(res)
+}
+
+const handleGet = async () => {
   console.log('Location input is: ' + inputData[0].location)
-  console.log('Post Response is: ')
-  console.log(res)
-  const geoArr = await getGeonames()
-  getWeather(geoArr)
-  getPix(geoArr)
-  res.send(weatherData, geoData, pixData)
+  console.log('Date input is: ' + inputData[0].date)
+  const geoObj = await getGeonames() // TODO: Change these names!!!
+  geoData.unshift(geoObj)
+  const weatherArr = await getWeather()
+  weatherData.unshift(weatherArr)
+  const pixStr = await getPix()
+  pixData.unshift(pixStr)
 }
 
 const getGeonames = async () => {
   const userCode = process.env.USR_CODE
-  console.log('Geonames user code: ' + userCode)
   const geoBaseURL = 'http://api.geonames.org/searchJSON?q=' // THEN NEED CITY NAME
   const geoAddURL = '&fuzzy=0.8&maxRows=10&username='
   const location = inputData[0].location
@@ -77,8 +83,9 @@ const getGeonames = async () => {
       throw new Error('Geonames did not return any data')
     } else {
       const geoArr = geoInfo.geonames[0];
+      console.log('geoInfo.geonames[0] is: ')
       console.log(geoArr)
-      geoData.unshift(geoArr.name + ' ,' + geoArr.adminName1 + ' ,' + geoArr.countryName)
+      // geoData.unshift(geoArr.name + ' ,' + geoArr.adminName1 + ' ,' + geoArr.countryName)
       return geoArr;
       // geoData.unshift(geoArr)
     }
@@ -87,49 +94,55 @@ const getGeonames = async () => {
   }
 }
 
-const getWeather = async (geoArr) => {
-  console.log('GeoObj made it to getWeather: ' + geoArr.adminName1)
+const getWeather = async () => {
+  console.log('GeoObj made it to getWeather: ' + geoData[0].adminName1)
   const weatherKey = process.env.WEATHER_KEY
   const weatherURL = 'https://api.weatherbit.io/v2.0/normals?' // THEN NEEDS LAT & LNG
-  const latLong = `lat=${geoArr.lat}&lon=${geoArr.lng}`
+  const latLong = `lat=${geoData[0].lat}&lon=${geoData[0].lng}`
   console.log('monthDay func is: ' + monthDay())
   const weatherAddURL = `&start_day=${monthDay()}&end_day=${monthDay()}&tp=daily&key=`
   const request = await fetch(weatherURL + latLong + weatherAddURL + weatherKey);
   try {
     const weatherObj = await request.json()
-    // return weatherObj.data[0];
     const weatherTop = weatherObj.data[0];
     console.log(weatherTop)
-    weatherData.unshift({
-      max: weatherTop.max_temp,
-      min: weatherTop.min_temp,
-      precip: weatherTop.precip,
-      snow: weatherTop.snow
-    })
+    return weatherTop;
+    // weatherData.unshift({
+    //   max: weatherTop.max_temp,
+    //   min: weatherTop.min_temp,
+    //   precip: weatherTop.precip,
+    //   snow: weatherTop.snow
+    // })
   } catch (error) {
     console.log("ERROR in Weather GET:", error);
   }
 }
 
-const getPix = async (geoArr) => {
+const getPix = async () => {
+  console.log('geoData made it to getPix: ' + geoData[0].name)
   const pixKey = process.env.PIX_KEY
-  const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoArr.name}&image_type=photo&orientation=horizontal&safesearch=true`
+  const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoData[0].name}&image_type=photo&orientation=horizontal&safesearch=true`
   const request = await fetch(pixURL);
   try {
     const pixObject = await request.json()
     const pixSrc = pixObject.hits[0].webformatURL
     console.log(pixSrc)
-    pixData.unshift(pixSrc)
-    // return pixSrc
+    // pixData.unshift(pixSrc)
+    return pixSrc
   } catch (error) {
     console.log("ERROR in Pix GET:", error);
   }
 }
 
 // Set up GET route
-app.get('/all', (req, res) => {
-  res.send(weatherData, geoData, pixData);
+app.get('/all', async (req, res) => {
+  handleGet()
+  .then(function () {
+    console.log('Returning all Data arrays: ')
+    console.log([weatherData[0], geoData[0], pixData[0]])
+    res.send([weatherData[0], geoData[0], pixData[0]])
+  })
 });
 
 // Set up POST route
-app.post('/add', handleData);
+app.post('/add', handleInput);
