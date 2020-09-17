@@ -4,17 +4,18 @@ import { dateDiff } from "./dateHandler"
 
 function handleSubmit(evt) {
   // evt.preventDefault() // Should this not be here?? Does it take away my HTML form qualifiers??
-  let location = document.getElementById('place').value
-  let dateStr = document.getElementById('start').value
-  let locationURI = encodeURI(location)
-  // TODO: Add qualifiers here!!!
-
-  console.log('Destination: ' + locationURI)
-  console.log('Departure: ' + dateStr)
-  Client.postInput('https://localhost:3031/add', { location: locationURI, date: dateStr })
-    .then(function () {
-    Client.updateUI(dateStr);
-    })
+  let location = document.getElementById('place')
+  let dateStr = document.getElementById('start')
+  let dateStrVal = document.getElementById('start').value
+  let locationURI = encodeURI(location.value)
+  if (location.value.length <= 0 || dateStrVal.length <= 0) {
+    location.classList.add('invalid');
+    dateStr.classList.add('invalid');
+    console.log('Invalid zip code entered!')
+  } else {
+    postInput('http://localhost:3031/add', { location: locationURI, date: dateStrVal })
+      .then(updateUI())
+  }
 }
 
 export {
