@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Raleway:ital,wght@1,300&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -15,7 +17,7 @@
     <main>
         <form id="form" onsubmit="return false">
             <label for="place">My trip to:</label>
-            <input type="text" id="place" name="place" pattern="[a-zA-Z\s]{2,85}" title="valid city" placeholder="enter city" required><br>
+            <input type="text" id="place" name="place" pattern="[a-zA-Z\s\,]{2,85}" title="valid city" placeholder="Enter City" required><br>
             <label for="trip-start">Departing:</label>
             <input type="date" id="start" name="trip-start" min="2020-10-01" max="2021-10-01" required><br>
             <input type="submit" id="generate" value="save trip">

@@ -19,12 +19,12 @@ const cors = require('cors')
 app.use(cors())
 
 // Initialize main project folder
-app.use(express.static('website'))
+app.use(express.static('dist'))
 
 console.log(__dirname)
 
 app.get('/', function (req, res) {
-  res.sendFile('website/index.html')
+  res.sendFile('index.html')
 })
 
 const port = 3031
@@ -111,15 +111,17 @@ const getWeather = async () => {
 }
 
 const getPix = async () => {
+  const geoDataURI = encodeURI(geoData[0].name)
   console.log('geoData made it to getPix: ' + geoData[0].name)
   const pixKey = process.env.PIX_KEY
-  const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoData[0].name}&image_type=photo&orientation=horizontal&safesearch=true&category=travel`
+  const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoDataURI}&image_type=photo&orientation=horizontal&safesearch=true&category=places`
   const request = await fetch(pixURL);
   try {
     const pixObject = await request.json()
     const pixSrc = pixObject.hits[0].webformatURL
     console.log(pixSrc)
     return pixSrc
+    // TODO: Pull in an image for the country from Pixabay API when the entered location brings up no results.
   } catch (error) {
     console.log("ERROR in Pix GET:", error);
   }

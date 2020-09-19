@@ -32,3 +32,7 @@ TBA
 ## Personal
 
 TBA
+
+## Acknowledgements
+
+airline by Alice Design from the Noun Project

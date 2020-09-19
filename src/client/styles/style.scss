@@ -1,3 +1,6 @@
+$font-one: 'Questrial', sans-serif;
+$font-two: 'Raleway', sans-serif;
+
 /* Full body style */
 body {
   height: 100vh;
@@ -8,63 +11,82 @@ body {
 
 /* Page header styles */
 #page-header {
-  font-family: 'Arial', sans-serif;
-}
+  font-family: $font-one;
 
-#page-header h1 {
+  h1 {
   font-weight: normal;
   font-size: 5rem;
   letter-spacing: 3px;
   margin: auto;
   padding: 1rem 4rem;
   background-color: white;
-}
+  }
 
-#page-header h2 {
-  font-weight: normal;
-  font-size: 3rem;
-  color: white;
-  word-spacing: 2rem;
-  text-shadow: white 2px 1px 6px;
-  margin: auto;
+  h2 {
+    font-weight: normal;
+    font-size: 3rem;
+    color: white;
+    word-spacing: 2rem;
+    text-shadow: white 2px 1px 6px;
+    margin: auto;
+  }
 }
 
 
 /* Main section styles */
-#instructions {
-  font-family: 'Open Sans', sans-serif;
-  font-style: italic;
-  font-size: 1.5rem;
-  font-weight: 100;
-  text-shadow: darkgrey 1px 1px 2px;
-  color: black;
-}
-
 #form {
   padding: 1rem 3rem;
-  font-family: Courier, serif;
-}
+  font-family: $font-two;
+  background-color: cadetblue;
 
-#zip {
-  font-size: 15px;
-  font-family: inherit;
-  padding: 10px;
-  border-radius: 3px;
-  border: 2px solid darkgoldenrod;
-  margin: 5px 0px;
-  background-color: #ffffff7a;
-}
+  label {
+    width: 100px;
+    font-size: 1.5rem;
+    word-spacing: 4px;
+  }
 
-#feelings {
-  width: 100%;
-  height: 150px;
-  padding: 12px;
-  box-sizing: border-box;
-  border: 2px solid darkgoldenrod;
-  border-radius: 4px;
-  background-color: #ffffff7a;
-  font-size: 16px;
-  resize: none;
+  input {
+    background-color: inherit;
+    font-family: inherit;
+    height: 20px;
+    width: 185px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    border-bottom: 1px solid black;
+    color: gray;
+    margin-bottom: 10px;
+    padding: 6px 0px 4px 10px;
+    margin-left: 4px;
+
+    &:focus {
+      border: none;
+      outline: none;
+      background-color: rgba(0, 0, 0, 0.25);
+      border-bottom: 1px solid black;
+    }
+  }
+
+  #generate {
+    font-family: "Questrial", sans-serif;
+    padding: 8px 12px 6px;
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 2.5rem;
+    width: 8.5rem;
+
+    &:hover {
+      border: white;
+      color: white;
+      background-color: black;
+      transition: ease 0.25s;
+    }
+  }
 }
 
 .invalid {
@@ -72,49 +94,50 @@ body {
   background-color: pink !important;
 }
 
-#generate {
-  padding: 8px 12px 6px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
-  background-color: white;
-  border-radius: 3px;
-  margin-top: 4px;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-#generate:hover {
-  border: white;
-  color: white;
-  background-color: black;
-}
-
-
 /* Post area */
-#all_posts {
-  display: none;
-  margin-top: 10px;
-  padding-top: 10px;
-  background-color: #002540;
-  min-height: 50vh;
-  box-shadow: 0px -1px 19px white;
+#all-posts {
+  margin: auto;
 }
 
 #entry-holder {
   display: none;
-  border: 2px solid green;
-  border-radius: 4px;
-  background-color: white;
+  border: 2px solid gray;
+  border-radius: 20px;
+  background-color: cornsilk;
   padding: 10px;
   margin: 20px;
-  width: 40rem;
+  width: fit-content;
   box-shadow: black 5px 5px 12px;
-  font-family: 'Pacifico', cursive;
+  font-family: "Questrial", sans-serif;
   word-spacing: 1px;
   font-size: 18px;
   color: #4a4a4a;
-}
+  white-space: nowrap;
 
-#content {
-  font-size: 1.5rem;
+  img {
+    width: 40%;
+    border-radius: 10px;
+  }
+
+  .stat-holder {
+    margin: 12px;
+
+    #wait {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    #temp {
+      font-size: 1rem;
+      margin-left: 2rem;
+    }
+
+    #precip {
+      font-size: 1rem;
+      margin-left: 2rem;
+    }
+  }
 }
