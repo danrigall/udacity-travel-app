@@ -8,29 +8,7 @@ body {
   background-color: gray
 }
 
-
-/* Page header styles */
-#page-header {
-  font-family: $font-one;
-
-  h1 {
-  font-weight: normal;
-  font-size: 5rem;
-  letter-spacing: 3px;
-  margin: auto;
-  padding: 1rem 4rem;
-  background-color: white;
-  }
-
-  h2 {
-    font-weight: normal;
-    font-size: 3rem;
-    color: white;
-    word-spacing: 2rem;
-    text-shadow: white 2px 1px 6px;
-    margin: auto;
-  }
-}
+// /* Page header styles */
 
 
 /* Main section styles */
@@ -94,50 +72,50 @@ body {
   background-color: pink !important;
 }
 
-/* Post area */
-#all-posts {
-  margin: auto;
-}
+// /* Post area */
+// #all-posts {
+//   margin: auto;
+// }
 
-#entry-holder {
-  display: none;
-  border: 2px solid gray;
-  border-radius: 20px;
-  background-color: cornsilk;
-  padding: 10px;
-  margin: 20px;
-  width: fit-content;
-  box-shadow: black 5px 5px 12px;
-  font-family: "Questrial", sans-serif;
-  word-spacing: 1px;
-  font-size: 18px;
-  color: #4a4a4a;
-  white-space: nowrap;
+// #entry-holder {
+//   display: none;
+//   border: 2px solid gray;
+//   border-radius: 20px;
+//   background-color: cornsilk;
+//   padding: 10px;
+//   margin: 20px;
+//   width: fit-content;
+//   box-shadow: black 5px 5px 12px;
+//   font-family: "Questrial", sans-serif;
+//   word-spacing: 1px;
+//   font-size: 18px;
+//   color: #4a4a4a;
+//   white-space: nowrap;
 
-  img {
-    width: 40%;
-    border-radius: 10px;
-  }
+//   img {
+//     width: 40%;
+//     border-radius: 10px;
+//   }
 
-  .stat-holder {
-    margin: 12px;
+//   .stat-holder {
+//     margin: 12px;
 
-    #wait {
-      font-size: 1.5rem;
-    }
+//     #wait {
+//       font-size: 1.5rem;
+//     }
 
-    h3 {
-      font-size: 1.5rem;
-    }
+//     h3 {
+//       font-size: 1.5rem;
+//     }
 
-    #temp {
-      font-size: 1rem;
-      margin-left: 2rem;
-    }
+//     #temp {
+//       font-size: 1rem;
+//       margin-left: 2rem;
+//     }
 
-    #precip {
-      font-size: 1rem;
-      margin-left: 2rem;
-    }
-  }
-}
+//     #precip {
+//       font-size: 1rem;
+//       margin-left: 2rem;
+//     }
+//   }
+// }

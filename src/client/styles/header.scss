@@ -1,0 +1,32 @@
+/* Page header styles */
+
+@media (min-width: 481px) {
+  #page-header {
+    font-family: 'Questrial', sans-serif;
+
+    h1 {
+    font-weight: normal;
+    font-size: 5rem;
+    letter-spacing: 3px;
+    margin: auto;
+    padding: 1rem 4rem;
+    background-color: white;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  #page-header {
+    font-family: 'Questrial', sans-serif;
+
+    h1 {
+      font-weight: normal;
+      font-size: 40px;
+      text-align: center;
+      letter-spacing: 2px;
+      margin: auto;
+      padding: 1rem 1rem;
+      background-color: white;
+    }
+  }
+}

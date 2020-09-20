@@ -63,11 +63,16 @@ const handleGet = async () => {
   const geoObj = await getGeonames()
   geoData.unshift(geoObj)
   // NEED: lng, lat, name(city name), adminName1(state), countryName
+
   const weatherObj = await getWeather()
   weatherData.unshift(weatherObj)
   // NEED: max_temp, min_temp, precip, snow(?)
-  const pixStr = await getPix()
-  pixData.unshift(pixStr)
+
+  const pixObj = await getPix(`${geoData[0].name}, ${geoData[0].adminName1}`)
+  await checkPix()
+  // console.log('pixChecker output is:')
+  // console.log(pixChecker)
+  // pixData.unshift(pixChecker)
 }
 
 const getGeonames = async () => {
@@ -78,14 +83,14 @@ const getGeonames = async () => {
   console.log('Location in GeonamesGet is: ' + location)
   const request = await fetch(geoBaseURL + location + geoAddURL + userCode);
   try {
-    const geoInfo = await request.json()
-    if (geoInfo.geonames.length == 0) {
+    const allGeo = await request.json()
+    if (allGeo.geonames.length == 0) {
       throw new Error('Geonames did not return any data')
     } else {
-      const geoArr = geoInfo.geonames[0];
-      console.log('geoInfo.geonames[0] is: ')
-      console.log(geoArr)
-      return geoArr;
+      const geoFirst = allGeo.geonames[0];
+      console.log('allGeo.geonames[0] is: ')
+      console.log(geoFirst)
+      return geoFirst;
     }
   } catch (error) {
     console.log("ERROR in Geo GET:", error);
@@ -93,7 +98,7 @@ const getGeonames = async () => {
 }
 
 const getWeather = async () => {
-  console.log('GeoObj made it to getWeather: ' + geoData[0].adminName1)
+  console.log('geoData[0] made it to getWeather: ' + geoData[0].name)
   const weatherKey = process.env.WEATHER_KEY
   const weatherURL = 'https://api.weatherbit.io/v2.0/normals?'
   const latLong = `lat=${geoData[0].lat}&lon=${geoData[0].lng}`
@@ -110,20 +115,35 @@ const getWeather = async () => {
   }
 }
 
-const getPix = async () => {
-  const geoDataURI = encodeURI(geoData[0].name)
-  console.log('geoData made it to getPix: ' + geoData[0].name)
+const getPix = async (place) => {
+  const geoURI = encodeURI(place)
+  console.log('geoData made it to getPix: ' + geoURI)
   const pixKey = process.env.PIX_KEY
-  const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoDataURI}&image_type=photo&orientation=horizontal&safesearch=true&category=places`
-  const request = await fetch(pixURL);
+  const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoURI}&image_type=photo&orientation=horizontal&safesearch=true&category=travel&category=places&category=buildings`
+  const fetchPix = await fetch(pixURL);
   try {
-    const pixObject = await request.json()
-    const pixSrc = pixObject.hits[0].webformatURL
-    console.log(pixSrc)
-    return pixSrc
-    // TODO: Pull in an image for the country from Pixabay API when the entered location brings up no results.
+    let allPix = await fetchPix.json()
+    pixData.unshift(allPix.hits[0])
+    console.log('Output of getPix.hits[0] is:')
+    console.log(allPix.hits[0])
+    return allPix.hits[0]
   } catch (error) {
     console.log("ERROR in Pix GET:", error);
+  }
+}
+
+const checkPix = async () => {
+  console.log('*** CHECKING FOR PICTURE ***')
+  const geoArr = [geoData[0].adminName1, geoData[0].countryName]
+  let i = 0
+  while (pixData[0] === undefined) {
+    const pixObj = await getPix(geoArr[i])
+    console.log('pixObj was checked & returned as:')
+    console.log(pixData[0])
+    i++
+    if (i > 1) {
+      break;
+    }
   }
 }
 
@@ -135,12 +155,12 @@ app.get('/all', async (req, res) => {
     console.log({
       geonames: geoData[0],
       weatherbit: weatherData[0],
-      pixabay: pixData[0]
+      pixabay: pixData[0].webformatURL
     })
     res.send({
       geonames: geoData[0],
       weatherbit: weatherData[0],
-      pixabay: pixData[0]
+      pixabay: pixData[0].webformatURL
     })
   })
 });

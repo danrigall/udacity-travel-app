@@ -1,0 +1,147 @@
+/* Post area */
+#all-posts {
+  margin: auto;
+}
+
+// Large Screens
+@media (min-width: 1025px) {
+  #entry-holder {
+    display: none;
+    border: 2px solid gray;
+    border-radius: 20px;
+    background-color: white;
+    padding: 10px;
+    margin: 20px;
+    width: fit-content;
+    box-shadow: black 5px 5px 12px;
+    font-family: "Questrial", sans-serif;
+    word-spacing: 1px;
+    font-size: 18px;
+    color: #4a4a4a;
+    white-space: nowrap;
+
+    img {
+      width: 40%;
+      border-radius: 10px;
+    }
+
+    .stat-holder {
+      margin: 12px;
+
+      #wait {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      #temp {
+        font-size: 1rem;
+        margin-left: 2rem;
+      }
+
+      #precip {
+        font-size: 1rem;
+        margin-left: 2rem;
+      }
+    }
+  }
+}
+
+// Medium Screens
+@media (min-width: 540px) and (max-width: 1024px) {
+  #entry-holder {
+    display: none;
+    flex-wrap: wrap-reverse;
+    border: 2px solid gray;
+    border-radius: 20px;
+    background-color: white;
+    padding: 10px;
+    margin: 20px;
+    width: fit-content;
+    box-shadow: black 5px 5px 12px;
+    font-family: "Questrial", sans-serif;
+    word-spacing: 1px;
+    font-size: 18px;
+    color: #4a4a4a;
+    white-space: normal;
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .stat-holder {
+      margin: 12px;
+
+      #wait {
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin: 10px 0px 6px;
+      }
+
+      #temp {
+        margin: 1rem;
+        font-size: 1.25rem;
+      }
+
+      #precip {
+        margin: 0rem 1rem 1rem;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+// Small Screens
+@media (max-width: 539px) {
+  #entry-holder {
+    display: none;
+    flex-wrap: wrap;
+    border: 2px solid gray;
+    border-radius: 20px;
+    background-color: white;
+    padding: 10px;
+    margin: 8px;
+    // width: fit-content;
+    box-shadow: black 5px 5px 12px;
+    font-family: "Questrial", sans-serif;
+    word-spacing: 1px;
+    font-size: 18px;
+    color: #4a4a4a;
+    white-space: nowrap;
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .stat-holder {
+      margin-top: 12px;
+      white-space: normal;
+
+      #wait {
+        font-size: 1.25rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin: 10px 0px 6px;
+      }
+
+      #temp {
+        margin: 1rem;
+        font-size: 1.25rem;
+      }
+
+      #precip {
+        margin: 0rem 1rem 1rem;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}

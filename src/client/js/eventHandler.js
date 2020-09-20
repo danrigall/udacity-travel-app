@@ -15,6 +15,8 @@ function handleSubmit(evt) {
   } else {
     postInput('http://localhost:3031/add', { location: locationURI, date: dateStrVal })
       .then(updateUI())
+    location.classList.remove('invalid');
+    dateStr.classList.remove('invalid');
   }
 }
 
