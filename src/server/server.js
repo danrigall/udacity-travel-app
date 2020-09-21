@@ -119,7 +119,6 @@ const getWeather = async () => {
   const weatherKey = process.env.WEATHER_KEY
   const weatherURL = 'https://api.weatherbit.io/v2.0/normals?'
   const latLong = `lat=${geoData[0].lat}&lon=${geoData[0].lng}`
-  console.log('monthDay func is: ' + monthDay())
   const weatherAddURL = `&start_day=${monthDay()}&end_day=${monthDay()}&tp=daily&key=`
   const request = await fetch(weatherURL + latLong + weatherAddURL + weatherKey);
   try {
