@@ -87,12 +87,12 @@ const handleGet = async () => {
 
 // Fetch from Geonames API
 const getGeonames = async () => {
-  const userCode = process.env.USR_CODE
+  const geoKey = process.env.GEO_KEY
   const geoBaseURL = 'http://api.geonames.org/searchJSON?q='
   const geoAddURL = '&fuzzy=0.8&maxRows=10&username='
   const location = inputData[0].location
 
-  const request = await fetch(geoBaseURL + location + geoAddURL + userCode)
+  const request = await fetch(geoBaseURL + location + geoAddURL + geoKey)
   try {
     const allGeo = await request.json()
     if (allGeo.geonames.length == 0) {
