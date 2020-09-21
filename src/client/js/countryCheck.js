@@ -1,3 +1,4 @@
+// Returns State if country is US
 function checkCountry(geoinfo) {
   if (geoinfo.countryName === 'United States') {
     return geoinfo.adminName1

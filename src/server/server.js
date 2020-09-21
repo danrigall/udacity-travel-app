@@ -27,6 +27,7 @@ app.get('/', function (req, res) {
   res.sendFile('index.html')
 })
 
+// Set port for server
 const port = 3031
 
 // Confirm that server is running
@@ -40,56 +41,64 @@ let geoData = []
 let pixData = []
 let inputData = []
 
-const monthDay = function () {
-  let dateSplit = inputData[0].date.split('-') // *** Maybe need .value??? ***
-  return (dateSplit[1] + '-' + dateSplit[2])
-  console.log('Date w/o year: ' + (dateSplit[1] + '-' + dateSplit[2]))
-}
-
+// Direct PUT data to inputData array
 function handleInput(req, res) {
 
   let userInput = {
     location: req.body.location,
     date: req.body.date
   }
-  console.log('req body (userInput) is: ')
-  console.log(userInput)
+
   inputData.unshift(userInput)
 }
 
+// Set up POST route
+app.post('/add', handleInput);
+
+// Set up GET route
+app.get('/all', async (req, res) => {
+  handleGet()
+    .then(function () {
+      console.log('Returning allData object: ')
+      console.log({
+        geonames: geoData[0],
+        weatherbit: weatherData[0],
+        pixabay: pixData[0].webformatURL
+      })
+      res.send({
+        geonames: geoData[0],
+        weatherbit: weatherData[0],
+        pixabay: pixData[0].webformatURL
+      })
+    })
+});
+
+// Function to call all API's in order when called by client GET
 const handleGet = async () => {
-  console.log('Location input is: ' + inputData[0].location)
-  console.log('Date input is: ' + inputData[0].date)
   const geoObj = await getGeonames()
   geoData.unshift(geoObj)
-  // NEED: lng, lat, name(city name), adminName1(state), countryName
 
   const weatherObj = await getWeather()
   weatherData.unshift(weatherObj)
-  // NEED: max_temp, min_temp, precip, snow(?)
 
   const pixObj = await getPix(`${geoData[0].name}, ${geoData[0].adminName1}`)
   await checkPix()
-  // console.log('pixChecker output is:')
-  // console.log(pixChecker)
-  // pixData.unshift(pixChecker)
 }
 
+// Fetch from Geonames API
 const getGeonames = async () => {
   const userCode = process.env.USR_CODE
   const geoBaseURL = 'http://api.geonames.org/searchJSON?q='
   const geoAddURL = '&fuzzy=0.8&maxRows=10&username='
   const location = inputData[0].location
-  console.log('Location in GeonamesGet is: ' + location)
-  const request = await fetch(geoBaseURL + location + geoAddURL + userCode);
+
+  const request = await fetch(geoBaseURL + location + geoAddURL + userCode)
   try {
     const allGeo = await request.json()
     if (allGeo.geonames.length == 0) {
       throw new Error('Geonames did not return any data')
     } else {
-      const geoFirst = allGeo.geonames[0];
-      console.log('allGeo.geonames[0] is: ')
-      console.log(geoFirst)
+      const geoFirst = allGeo.geonames[0]
       return geoFirst;
     }
   } catch (error) {
@@ -97,6 +106,14 @@ const getGeonames = async () => {
   }
 }
 
+// Function to separate month & day out of Date
+const monthDay = function () {
+  let dateSplit = inputData[0].date.split('-')
+  return (dateSplit[1] + '-' + dateSplit[2])
+  console.log('Date w/o year: ' + (dateSplit[1] + '-' + dateSplit[2]))
+}
+
+// Fetch from Weatherbit API
 const getWeather = async () => {
   console.log('geoData[0] made it to getWeather: ' + geoData[0].name)
   const weatherKey = process.env.WEATHER_KEY
@@ -115,6 +132,7 @@ const getWeather = async () => {
   }
 }
 
+// Fetch from Pixabay API
 const getPix = async (place) => {
   const geoURI = encodeURI(place)
   console.log('geoData made it to getPix: ' + geoURI)
@@ -132,6 +150,7 @@ const getPix = async (place) => {
   }
 }
 
+// Function to keep looking if Pixabay does not return valid picture
 const checkPix = async () => {
   console.log('*** CHECKING FOR PICTURE ***')
   const geoArr = [geoData[0].adminName1, geoData[0].countryName]
@@ -146,24 +165,3 @@ const checkPix = async () => {
     }
   }
 }
-
-// Set up GET route
-app.get('/all', async (req, res) => {
-  handleGet()
-  .then(function () {
-    console.log('Returning allData object: ')
-    console.log({
-      geonames: geoData[0],
-      weatherbit: weatherData[0],
-      pixabay: pixData[0].webformatURL
-    })
-    res.send({
-      geonames: geoData[0],
-      weatherbit: weatherData[0],
-      pixabay: pixData[0].webformatURL
-    })
-  })
-});
-
-// Set up POST route
-app.post('/add', handleInput);

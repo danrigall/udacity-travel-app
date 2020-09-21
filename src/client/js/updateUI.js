@@ -1,5 +1,4 @@
-import { dateDiff } from "./dateHandler"
-
+// Fetches gathered data from server & updates UI with it
 const updateUI = async () => {
   const request = await fetch('http://localhost:3031/all')
   try {
@@ -11,8 +10,8 @@ const updateUI = async () => {
     console.log(allData)
     document.getElementById('entry-holder').style.display = 'flex'
     document.getElementById('image').src = pixabay
-    document.getElementById('wait').innerHTML = `<i>${geonames.name}, ${Client.checkCountry(geonames)} is ${dateDiff()} days away.</i>`
-    document.getElementById('temp').innerHTML = `High - ${weatherbit.max_temp}&degC, Low - ${weatherbit.min_temp}&degC`
+    document.getElementById('wait').innerHTML = `<i>${geonames.name}, ${Client.checkCountry(geonames)} is ${Client.dateDiff()} days away.</i>`
+    document.getElementById('temp').innerHTML = `High: ${weatherbit.max_temp}&degC, Low: ${weatherbit.min_temp}&degC`
     document.getElementById('precip').innerHTML = `With a chance for ${weatherbit.precip}mm of precipitation`
   } catch (error) {
     console.log('ERROR in UI update:', error)

@@ -1,3 +1,4 @@
+// POST input data to server
 const postInput = async (url = '', data = {}) => {
   const response = await fetch(url, {
     method: 'POST',

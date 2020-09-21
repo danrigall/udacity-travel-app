@@ -1,9 +1,5 @@
-import { updateUI } from "./updateUI"
-import { postInput } from "./postData"
-import { dateDiff } from "./dateHandler"
-
+// Handles the click & calls the other functions
 function handleSubmit(evt) {
-  // evt.preventDefault() // Should this not be here?? Does it take away my HTML form qualifiers??
   let location = document.getElementById('place')
   let dateStr = document.getElementById('start')
   let dateStrVal = document.getElementById('start').value
@@ -11,18 +7,15 @@ function handleSubmit(evt) {
   if (location.value.length <= 0 || dateStrVal.length <= 0) {
     location.classList.add('invalid');
     dateStr.classList.add('invalid');
-    console.log('Invalid zip code entered!')
+    console.log('All fields must be filled!')
+    return false
   } else {
-    postInput('http://localhost:3031/add', { location: locationURI, date: dateStrVal })
-      .then(updateUI())
+    Client.postInput('http://localhost:3031/add', { location: locationURI, date: dateStrVal })
+      .then(Client.updateUI())
     location.classList.remove('invalid');
     dateStr.classList.remove('invalid');
+    return true
   }
 }
 
-export {
-  updateUI,
-  postInput,
-  dateDiff,
-  handleSubmit
-}
+export { handleSubmit }

@@ -1,3 +1,4 @@
+h// Calculates difference between current & departing dates
 function dateDiff() {
   let dateStrVal = document.getElementById('start').value
   let newDate = new Date()
