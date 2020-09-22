@@ -14,18 +14,19 @@
 This is a Travel App that takes in 2 pieces of data (Destination & Date), then pulls from 3 different API's (Geonames, Weatherbit, & Pixabay) to create a 'Destination Post'. This will be heavily utilizing Webpack & Node.js.
 
 ## Getting Started
-1. Create API credentals for Geonames, Weatherbit, and Pixabay.
-2. Create .env file at the root of the project & populate with API credentials:
-  * Geonames: GEO_KEY=yourKeyHere
-  * Weatherbit: WEATHER_KEY=yourKeyHere
-  * Pixabay: PIX_KEY=yourKeyHere
-3. Run 'npm install' to install all dependencies listed in package.json
-4. If development is to be done:
-  * Use the 'npm run build-dev' command to start the development server.
-  * Then start the express server using 'npm run start'
-5. If you simply want to experience the majesty of the app:
-  * Start the express server using 'npm run start'
-  * Then visit localhost:3031 in your browser.
+1. Create API credentials for Geonames, Weatherbit, and Pixabay.
+2. **Test** your API credentials using the example url each API provides to make sure your key works.
+3. Create .env file at the root of the project & populate with API credentials:
+  i. Geonames: GEO_KEY=yourKeyHere
+  ii. Weatherbit: WEATHER_KEY=yourKeyHere
+  iii. Pixabay: PIX_KEY=yourKeyHere
+4. Run 'npm install' to install all dependencies listed in package.json
+5. If development is to be done:
+  i. Use the 'npm run build-dev' command to start the development server.
+  ii. Then start the express server using 'npm run start'
+6. If you simply want to experience the majesty of the app:
+  i. Start the express server using 'npm run start'
+  ii. Then visit localhost:3031 in your browser.
 
 
 ## Structure
