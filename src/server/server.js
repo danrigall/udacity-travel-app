@@ -88,6 +88,7 @@ const handleGet = async () => {
 // Fetch from Geonames API
 const getGeonames = async () => {
   const geoKey = process.env.GEO_KEY
+  console.log('Your geoKey is: ' + geoKey)
   const geoBaseURL = 'http://api.geonames.org/searchJSON?q='
   const geoAddURL = '&fuzzy=0.8&maxRows=10&username='
   const location = inputData[0].location
@@ -117,6 +118,7 @@ const monthDay = function () {
 const getWeather = async () => {
   console.log('geoData[0] made it to getWeather: ' + geoData[0].name)
   const weatherKey = process.env.WEATHER_KEY
+  console.log('Your weatherKey is: ' + weatherKey)
   const weatherURL = 'https://api.weatherbit.io/v2.0/normals?'
   const latLong = `lat=${geoData[0].lat}&lon=${geoData[0].lng}`
   const weatherAddURL = `&start_day=${monthDay()}&end_day=${monthDay()}&tp=daily&key=`
@@ -136,6 +138,7 @@ const getPix = async (place) => {
   const geoURI = encodeURI(place)
   console.log('geoData made it to getPix: ' + geoURI)
   const pixKey = process.env.PIX_KEY
+  console.log('Your pixKey is: ' + pixKey)
   const pixURL = `https://pixabay.com/api/?key=${pixKey}&q=${geoURI}&image_type=photo&orientation=horizontal&safesearch=true&category=travel&category=places&category=buildings`
   const fetchPix = await fetch(pixURL);
   try {
