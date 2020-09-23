@@ -40,6 +40,7 @@ let weatherData = []
 let geoData = []
 let pixData = []
 let inputData = []
+// *** TODO: Rig fetches so data arrays may be eliminated!! ***
 
 // Direct PUT data to inputData array
 function handleInput(req, res) {

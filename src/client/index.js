@@ -10,11 +10,10 @@ import './styles/style.scss'
 import './styles/header.scss'
 import './styles/post.scss'
 
-// Import images from 'client'
-// import Image from './media'
-
 // Set up event listener for button
-document.getElementById('generate').addEventListener('click', handleSubmit)
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('generate').addEventListener('click', handleSubmit);
+})
 
 export {
     updateUI,
