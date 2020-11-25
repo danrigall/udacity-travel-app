@@ -2,52 +2,43 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Planner</title>
-    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Raleway:ital,wght@1,300&display=swap"
-        rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Raleway:ital,wght@1,300&display=swap"
+  rel="stylesheet">
 </head>
 
 <body>
-    <header id="page-header">
-        <h1>Travel Me Silly</h1>
-    </header>
+  <header id="page-header">
+    <h1>Travel Me Silly</h1>
+  </header>
 
-    <main>
-        <form id="form" onsubmit="return false">
-            <label for="place">My trip to:</label>
-            <input type="text" id="place" name="place" pattern="[a-zA-Z,\s]{2,85}" title="valid city" placeholder="Enter Destination" required><br>
-            <label for="trip-start">Departing:</label>
-            <input type="date" id="start" name="trip-start" min="2020-10-01" max="2021-10-01" required><br>
-            <input type="submit" id="generate" value="save trip">
-        </form>
-        <section id="all-posts">
-            <div id="entry-holder">
-                <img id="image">
-                <div class="stat-holder">
-                    <div id="wait"></div>
-                    <h3>Typical weather for then is:</h3>
-                    <div id="temp"></div>
-                    <div id="precip"></div>
-                </div>
-            </div>
-        </section>
-    </main>
+  <main>
+    <form id="form" onsubmit="return false">
+      <label for="place">My trip to:</label>
+      <input type="text" id="place" name="place" pattern="[a-zA-Z,\s]{2,85}" title="valid city" placeholder="Enter Destination" required><br>
+      <label for="trip-start">Departing:</label>
+      <input type="date" id="start" name="trip-start" min="2020-10-01" max="2021-10-01" required><br>
+      <input type="submit" id="generate" value="save trip">
+    </form>
 
-    <footer>
-    </footer>
+    <section id="all-posts">
+    </section>
+  </main>
 
+  <footer>
+  </footer>
 </body>
 
 <script>
-    // Check that service workers are supported
-    if ('serviceWorker' in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js');
-        });
-    }
+// Check that service workers are supported
+if ('serviceWorker' in navigator) {
+// Use the window load event to keep the page load performant
+window.addEventListener('load', () => {
+navigator.serviceWorker.register('/service-worker.js');
+});
+}
 </script>
 
 </html>

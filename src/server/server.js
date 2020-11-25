@@ -117,13 +117,14 @@ const monthDay = function () {
 
 // Fetch from Weatherbit API
 const getWeather = async () => {
-  console.log('geoData[0] made it to getWeather: ' + geoData[0].name)
+  console.log('geoData[0] made it to getWeather:')
+  console.log(geoData[0])
   const weatherKey = process.env.WEATHER_KEY
   console.log('Your weatherKey is: ' + weatherKey)
-  const weatherURL = 'https://api.weatherbit.io/v2.0/normals?'
-  const latLong = `lat=${geoData[0].lat}&lon=${geoData[0].lng}`
-  const weatherAddURL = `&start_day=${monthDay()}&end_day=${monthDay()}&tp=daily&key=`
-  const request = await fetch(weatherURL + latLong + weatherAddURL + weatherKey);
+  const weatherURL = 'https://api.weatherbit.io/v2.0/forecast/daily?'
+  const latLong = `lat=${geoData[0].lat}&lon=${geoData[0].lng}&key=`
+  console.log(weatherURL + latLong + weatherKey)
+  const request = await fetch(weatherURL + latLong + weatherKey);
   try {
     const allWeather = await request.json()
     const weatherTop = allWeather.data[0];

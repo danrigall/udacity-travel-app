@@ -5,8 +5,8 @@
 
 // Large Screens
 @media (min-width: 1025px) {
-  #entry-holder {
-    display: none;
+  .entry-holder {
+    display: flex;
     border: 2px solid gray;
     border-radius: 20px;
     background-color: white;
@@ -28,7 +28,7 @@
     .stat-holder {
       margin: 12px;
 
-      #wait {
+      .wait-time {
         font-size: 1.5rem;
       }
 
@@ -36,12 +36,12 @@
         font-size: 1.5rem;
       }
 
-      #temp {
+      .temp {
         font-size: 1rem;
         margin-left: 2rem;
       }
 
-      #precip {
+      .precip {
         font-size: 1rem;
         margin-left: 2rem;
       }
@@ -51,8 +51,8 @@
 
 // Medium Screens
 @media (min-width: 540px) and (max-width: 1024px) {
-  #entry-holder {
-    display: none;
+  .entry-holder {
+    display: flex;
     flex-wrap: wrap-reverse;
     border: 2px solid gray;
     border-radius: 20px;
@@ -75,7 +75,7 @@
     .stat-holder {
       margin: 12px;
 
-      #wait {
+      .wait-time {
         font-size: 2rem;
       }
 
@@ -84,12 +84,12 @@
         margin: 10px 0px 6px;
       }
 
-      #temp {
+      .temp {
         margin: 1rem;
         font-size: 1.25rem;
       }
 
-      #precip {
+      .precip {
         margin: 0rem 1rem 1rem;
         font-size: 1.25rem;
       }
@@ -99,8 +99,8 @@
 
 // Small Screens
 @media (max-width: 539px) {
-  #entry-holder {
-    display: none;
+  .entry-holder {
+    display: flex;
     flex-wrap: wrap;
     border: 2px solid gray;
     border-radius: 20px;
@@ -124,7 +124,7 @@
       margin-top: 12px;
       white-space: normal;
 
-      #wait {
+      .wait-time {
         font-size: 1.25rem;
       }
 
@@ -133,12 +133,12 @@
         margin: 10px 0px 6px;
       }
 
-      #temp {
+      .temp {
         margin: 1rem;
         font-size: 1.25rem;
       }
 
-      #precip {
+      .precip {
         margin: 0rem 1rem 1rem;
         font-size: 1.25rem;
       }

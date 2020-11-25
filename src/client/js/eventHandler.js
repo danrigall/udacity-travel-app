@@ -1,3 +1,5 @@
+import { dateDiff } from "./dateHandler";
+
 // Handles the click & calls the other functions
 function handleSubmit(evt) {
   let location = document.getElementById('place')
@@ -8,6 +10,11 @@ function handleSubmit(evt) {
     location.classList.add('invalid');
     dateStr.classList.add('invalid');
     console.log('All fields must be filled!')
+    return false
+  } else if (Client.dateDiff() > 16.5) {
+    dateStr.classList.add('invalid');
+    console.log(Client.dateDiff());
+    alert('You must travel less than 16 days from now!');
     return false
   } else {
     Client.postInput('http://localhost:3031/add', { location: locationURI, date: dateStrVal })
