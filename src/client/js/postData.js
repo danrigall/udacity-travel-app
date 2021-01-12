@@ -8,8 +8,9 @@ const postInput = async (url = '', data = {}) => {
   })
   try {
     const newData = await response.json();
+    console.log('newData in postInput function is:')
     console.log(newData)
-    return newData
+    Client.updateUI(newData)
   } catch (error) {
     console.log('ERROR in POST:', error);
   }
