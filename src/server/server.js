@@ -125,6 +125,7 @@ const getWeather = async (geo) => {
   }
 }
 
+// TODO: FIND A BETTER PICTURE API!!!!
 // Fetch from Pixabay API
 const getPix = async (place) => {
   console.log('geoData made it to getPix: ' + place)
