@@ -23,7 +23,7 @@ This is a Travel App that takes in 2 pieces of data (Destination & Date), then p
 1. Run 'npm install' to install all dependencies listed in package.json
 1. If development is to be done:
     1. Use the 'npm run build-dev' command to start the development server.
-    1. Then start the express server using 'npm run start'
+    1. Then start the express server in a new terminal window using 'npm run start'
 1. If you simply want to experience the majesty of the app:
     1. Start the express server using 'npm run start'
     1. Then visit localhost:3031 in your browser.
